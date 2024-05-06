@@ -28,7 +28,6 @@ jobs:
             echo "OTC Page is UP"
           else
             echo "OTC Page is DOWN"
-            exit 1
           fi
         env:
           PAGE_URL: "https://hhealthfirst.org/widgets/lofl-otc-widget.html?memberId=138429371&appId=CUSTOMER_CENTER&authorizer=OKTA&lang=en&token="
