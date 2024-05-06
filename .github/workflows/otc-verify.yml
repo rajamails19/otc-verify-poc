@@ -18,7 +18,7 @@ jobs:
         
       - name: GET and SAVE Id token
         run: |
-          here, will call the POST API to get the token and save it
+          # here, will call the POST API to get the token and save it
           echo GET and SAVE token from API
           
       - name: Send Request with id Token
