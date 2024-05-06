@@ -16,18 +16,18 @@ jobs:
           sudo apt-get update && sudo apt-get install -y curl
           echo installed cURL
         
-      - name: Install Okta CLI
+      - name: GET and SAVE Id token
         run: |
-          sudo curl https://raw.githubusercontent.com/okta/okta-cli/master/cli/src/main/scripts/install.sh
-          echo installed okta cli
+          here, will call the POST API to get the token and save it
+          echo GET and SAVE token from API
           
-      - name: Send Request with Okta Token
+      - name: Send Request with id Token
         run: |
           RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" $PAGE_URL)
           if [ $RESPONSE -eq 200 ]; then
-            echo "Google Page is UP"
+            echo "OTC Page is UP"
           else
-            echo "Google Page is DOWN"
+            echo "OTC Page is DOWN"
           fi
         env:
-          PAGE_URL: "https://www.google.com/"
+          PAGE_URL: "https://hf-cde-trailblazer-st.healthfirst.org/widgets/lofl-otc-widget.html?memberId=138429371&appId=CUSTOMER_CENTER&authorizer=OKTA&lang=en&token="
