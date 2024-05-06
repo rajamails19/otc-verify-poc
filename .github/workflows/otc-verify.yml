@@ -18,7 +18,15 @@ jobs:
         
       - name: GET and SAVE Id token
         run: |
-          # here, will call the POST API to get the token and save it
+          ID_TOKEN=$(curl --request POST \
+          --url https://nl9olslot5.execute-api.us-east-1.amazonaws.com/st/api/v1/login \
+          --header 'User-Agent: Member-iOS' \
+          --header 'X-API-KEY: QqLLrg5CBy70besuoa0Yg8xQ1gpkuHyx5PA6bjeb' \
+          --header 'content-type: application/json' \
+          --data '{
+          "username": "SRUTH",
+          "password": "Healthfirst*123"
+          }')
           echo GET and SAVE token from API
           
       - name: Send Request with id Token
@@ -31,4 +39,4 @@ jobs:
             exit 1
           fi
         env:
-          PAGE_URL: "https://hhealthfirst.org/widgets/lofl-otc-widget.html?memberId=138429371&appId=CUSTOMER_CENTER&authorizer=OKTA&lang=en&token="
+          PAGE_URL: "https://hf-cde-trailblazer-st.healthfirst.org/widgets/lofl-otc-widget.html?memberId=138429371&appId=CUSTOMER_CENTER&authorizer=OKTA&lang=en&token="
