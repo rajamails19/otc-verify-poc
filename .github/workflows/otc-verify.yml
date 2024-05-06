@@ -1,0 +1,33 @@
+name: Check Page Availability
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Runs every hour
+  push:
+    branches: [ "main" ]
+
+jobs:
+  check-page:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Install cURL
+        run: |
+          sudo apt-get update && sudo apt-get install -y curl
+          echo installed cURL
+        
+      - name: Install Okta CLI
+        run: |
+          sudo curl https://raw.githubusercontent.com/okta/okta-cli/master/cli/src/main/scripts/install.sh
+          echo installed okta cli
+          
+      - name: Send Request with Okta Token
+        run: |
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" $PAGE_URL)
+          if [ $RESPONSE -eq 200 ]; then
+            echo "Google Page is UP"
+          else
+            echo "Google Page is DOWN"
+          fi
+        env:
+          PAGE_URL: "https://www.google.com/"
