@@ -18,7 +18,7 @@ jobs:
         
       - name: GET and SAVE Id token
         run: |
-          ID_TOKEN=$(curl --request POST \
+          RESPONSE=$(curl --request POST \
           --url https://nl9olslot5.execute-api.us-east-1.amazonaws.com/st/api/v1/login \
           --header 'User-Agent: Member-iOS' \
           --header 'X-API-KEY: QqLLrg5CBy70besuoa0Yg8xQ1gpkuHyx5PA6bjeb' \
@@ -26,8 +26,8 @@ jobs:
           --data '{
           "username": "SRUTH",
           "password": "Healthfirst*123"
-          }' \
-          | jq -r '.id_token')
+          }')
+          ID_TOKEN=$(echo "$ID_TOKEN" | jq -r '.id_token')
           echo "GET and SAVE token from API ID_TOKEN::$ID_TOKEN"
           
       - name: Send Request with id Token
