@@ -27,7 +27,8 @@ jobs:
           "username": "SRUTH",
           "password": "Healthfirst*123"
           }')
-          ID_TOKEN=$(echo "$ID_TOKEN" | jq -r '.id_token')
+          echo "RESPONSE::$RESPONSE"
+          ID_TOKEN=$(echo "$RESPONSE" | jq -r '.token_type')
           echo "GET and SAVE token from API ID_TOKEN::$ID_TOKEN"
           
       - name: Send Request with id Token
