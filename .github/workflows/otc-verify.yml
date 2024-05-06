@@ -27,13 +27,12 @@ jobs:
           "username": "SRUTH",
           "password": "Healthfirst*123"
           }')
-          echo "RESPONSE::$RESPONSE"
-          ID_TOKEN=$(echo "$RESPONSE" | jq -r '.data.token_type')
+          ID_TOKEN=$(echo "$RESPONSE" | jq -r '.data.id_token')
           echo "GET and SAVE token from API ID_TOKEN::$ID_TOKEN"
           
       - name: Send Request with id Token
         run: |
-          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" $PAGE_URL) || RESPONSE=""
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" $PAGE_URL$ID_TOKEN) || RESPONSE=""
           if [ $RESPONSE -eq 200 ]; then
             echo "OTC Page is UP"
           else
