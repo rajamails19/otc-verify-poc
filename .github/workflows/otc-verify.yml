@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Install cURL
         run: |
-          sudo apt-get update && sudo apt-get install -y curl
+          sudo apt-get update && sudo apt-get install -y curl jq
           echo installed cURL
         
       - name: GET and SAVE Id token
@@ -26,8 +26,8 @@ jobs:
           --data '{
           "username": "SRUTH",
           "password": "Healthfirst*123"
-          }')
-          echo "GET and SAVE token from API ID_TOKEN::$ID_TOKEN['id_token']"
+          }') | jq -r '.id_token'
+          echo "GET and SAVE token from API ID_TOKEN::$ID_TOKEN"
           
       - name: Send Request with id Token
         run: |
