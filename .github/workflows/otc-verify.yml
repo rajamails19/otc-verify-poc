@@ -26,8 +26,9 @@ jobs:
           --data '{
           "username": "SRUTH",
           "password": "Healthfirst*123"
-          }')
-          echo GET and SAVE token from API
+          }' \
+          | jq -r '.id_token')
+          echo "GET and SAVE token from API ID_TOKEN::$ID_TOKEN"
           
       - name: Send Request with id Token
         run: |
