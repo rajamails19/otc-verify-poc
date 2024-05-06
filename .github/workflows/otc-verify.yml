@@ -23,7 +23,7 @@ jobs:
           
       - name: Send Request with id Token
         run: |
-          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" $PAGE_URL)
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" $PAGE_URL) || RESPONSE=""
           if [ $RESPONSE -eq 200 ]; then
             echo "OTC Page is UP"
           else
